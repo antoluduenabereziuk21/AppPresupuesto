@@ -9,7 +9,9 @@
 
 # dependencies
 /node_modules
-
+/servereExpress/node_modules
+# .env config
+/servereExpress/.env
 # profiling files
 chrome-profiler-events*.json
 
