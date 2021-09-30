@@ -4,6 +4,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { EntryComponent } from './entry/entry.component';
 import { EgressComponent } from './egress/egress.component';
 import { DashboardRoutingModule } from './dashboard-routing.module';
+import { HeadboardComponent } from './headboard/headboard.component';
 
 
 
@@ -11,7 +12,8 @@ import { DashboardRoutingModule } from './dashboard-routing.module';
   declarations: [
     DashboardComponent,
     EntryComponent,
-    EgressComponent
+    EgressComponent,
+    HeadboardComponent
 
   ],
   imports: [
