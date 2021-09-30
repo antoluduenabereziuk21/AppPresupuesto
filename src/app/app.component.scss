@@ -13,3 +13,16 @@
   align-items:center;
 }
 
+.bg {
+  background-color: #08090d;
+  color: #ccc9dc;
+  background-image: url('.././assets/man-593333_1920.jpg');
+  min-height: 93vh;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+  background-position: top;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
