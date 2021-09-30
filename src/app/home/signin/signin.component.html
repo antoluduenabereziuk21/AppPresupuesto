@@ -1,1 +1,35 @@
-<p>signin works!</p>
+<div class="login">
+  <div class="login__header">
+    <button *ngIf="loading" class="btn btn-primary" type="button" disabled >
+      <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+      Loading...
+    </button>
+    <form *ngIf="!loading" [formGroup]='form' (ngSubmit)="ingresar()">
+      <img src="../../../assets/user.png" width="50%" class="mb-3">
+      <div class="form-floating mb-3">
+        <input
+          type="email"
+          class="form-control "
+          id="floatingInput"
+          placeholder="name@example.com"
+          formControlName="email"
+        />
+        <label for="floatingInput">Email address</label>
+      </div>
+      <div class="form-floating mb-3">
+        <input
+          type="password"
+          class="form-control"
+          id="floatingPassword"
+          placeholder="Password"
+          formControlName="password"
+        />
+        <label for="floatingPassword">Password</label>
+      </div>
+      <div>
+        <button type="submit" class="btn btn-primary ancho alto mb-3">Sign in</button>
+        <button type="button" class="btn btn-secondary ancho alto" (click)="back()">Back</button>
+      </div>
+    </form>
+  </div>
+</div>
