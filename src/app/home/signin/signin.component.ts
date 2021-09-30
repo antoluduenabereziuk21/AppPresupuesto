@@ -70,7 +70,7 @@ export class SigninComponent implements OnInit {
     this.loading= true;
     setTimeout(()=>{
       //redirecccionamos al al escritorio
-      this.router.navigate(['home']);
+      this.router.navigate(['/dashboard']);
     },3500
     );
   }

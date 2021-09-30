@@ -1,1 +1,45 @@
-<p>register works!</p>
+<div class="register">
+  <div class="register__header">
+    <button *ngIf="loading" class="btn btn-primary" type="button" disabled >
+      <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+      Loading...
+    </button>
+    <form *ngIf="!loading" [formGroup]='register' (ngSubmit)="signUp()">
+      <img src="../../../assets/register.png" width="50%" class="mb-3">
+      <div class="form-floating mb-3">
+        <input
+          type="text"
+          class="form-control "
+          id="floatingInput"
+          placeholder="User_Name"
+          formControlName="user_name"
+        />
+        <label for="floatingInput">Enter your Name</label>
+      </div>
+      <div class="form-floating mb-3">
+        <input
+          type="text"
+          class="form-control "
+          id="floatingInput"
+          placeholder="Entre your Email Address"
+          formControlName="email"
+        />
+        <label for="floatingInput">Enter your Email Address</label>
+      </div>
+      <div class="form-floating mb-3">
+        <input
+          type="password"
+          class="form-control "
+          id="floatingInput"
+          placeholder="Entre your Password"
+          formControlName="password"
+        />
+        <label for="floatingInput">Entre your Password</label>
+      </div>
+      <div>
+        <button type="submit" class="btn btn-primary ancho alto mb-3">Sign Up</button>
+        <button type="button" class="btn btn-secondary ancho alto" (click)="back()">Back</button>
+      </div>
+    </form>
+  </div>
+</div>
