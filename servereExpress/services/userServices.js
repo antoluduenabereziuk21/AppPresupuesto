@@ -56,10 +56,10 @@ const comparePass = (userPass, hashedPass) => {
   return bcrypt.compare(userPass, hashedPass);
 };
 
-const login = async ({ user_name, password }) => {
-  // console.log("login - user_name["+ user_name+"]"+ " - password["+ password+"]" );
+const login = async ({ email, password }) => {
+  console.log("login - email["+ email +"]"+ " - password["+ password+"]" );
   const user = await userModel.findOne({
-    where: { user_name: user_name.toLowerCase() },
+    where: { email: email },
   });
   const isMatch = user && (await comparePass(password, user.password));
   if (!isMatch) {

@@ -1,13 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { AuthService } from 'src/app/services/auth.service';
+import {TokenStorageService} from 'src/app/services/token-storage.service';
 @Component({
   selector: 'app-signin',
   templateUrl: './signin.component.html',
   styleUrls: ['./signin.component.scss']
 })
 export class SigninComponent implements OnInit {
-
 
   hide = true;
 
@@ -20,7 +21,9 @@ export class SigninComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private fb :FormBuilder
+    private fb :FormBuilder,
+    private _authService: AuthService,
+    private _tokenStorage: TokenStorageService
     )
      {
        this.form = this.fb.group({
@@ -37,23 +40,23 @@ export class SigninComponent implements OnInit {
     const password = this.form.value.password;
     console.log(this.form.value.password + ' ' + this.form.value.email);
 
-    if(email && password !== ""){
-      this.fakelogin()
-    }
-    else{
-      alert("Please enter email and password")
-    }
-    // this._authService.login(user_name, password).subscribe(
-    //   data=> {
-    //     this._tokenStorage.saveToken(data.token);
-    //     this.fakelogin();
-    //   },
-    //   err => {
-    //     this.errorMessage = err.error.message;
-    //     this.error();
-    //     this.form.reset();
-    //   }
-    // );
+    // if(email && password !== ""){
+    //   this.fakelogin()
+    // }
+    // else{
+    //   alert("Please enter email and password")
+    // }
+    this._authService.login(email, password).subscribe(
+      data=> {
+        this._tokenStorage.saveToken(data.token);
+        this.fakelogin();
+      },
+      err => {
+        this.errorMessage = err.error.message;
+        // this.error();
+        this.form.reset();
+      }
+    );
   }
 
   // error(){

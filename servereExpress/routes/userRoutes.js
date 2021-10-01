@@ -1,18 +1,25 @@
 const express = require('express');
 const router = express.Router();
 const routeController = require("../common/routeController");
-const userController = require ("../controller/userController");
+const budgetController = require("../controller/budgetController");
 
-router.get("/:id",(req, res,)=> {
-  routeController.handleRequest(req, res,userController.getById);
-});
-router.get("/",(req, res,)=> {
-  routeController.handleRequest(req, res,userController.getAll);
+router.post('/newprocess', (req, res) => {
+  routeController.handleRequest(req, res, budgetController.createTypeProcess)
 });
 
-router.post('/',(req,res)=>{
-  routeController.handleRequest(req,res,userController.create)
+router.get('/entry', (req, res) => {
+  routeController.handleRequest(req, res, budgetController.getAllEntry)
+});
+
+router.get('/egress', (req, res) => {
+  routeController.handleRequest(req, res, budgetController.getAllEgress)
+});
+
+router.delete('/:id', (req, res) =>{
+    routeController.handleRequest(req, res, budgetController.deletingProcess)
 })
+
+
 
 module.exports = router;
 

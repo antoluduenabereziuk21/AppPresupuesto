@@ -7,7 +7,9 @@ const config = require('config');
 const apiPrefix= config.get('apiPrefix');
 const passport = require('passport');
 const passportConfig = require('./config/server/passportConfig');
+const cors = require('cors');
 
+app.use(cors())
 passport.use(passportConfig.createStrategy());
 app.use(passport.initialize());
 
