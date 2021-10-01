@@ -5,6 +5,7 @@ import { EntryComponent } from './entry/entry.component';
 import { EgressComponent } from './egress/egress.component';
 import { DashboardRoutingModule } from './dashboard-routing.module';
 import { HeadboardComponent } from './headboard/headboard.component';
+import { SharedModule } from '../shared/shared.module';
 
 
 
@@ -19,6 +20,7 @@ import { HeadboardComponent } from './headboard/headboard.component';
   imports: [
     CommonModule,
     DashboardRoutingModule,
+    SharedModule
   ]
 })
 export class DashboardModule { }
