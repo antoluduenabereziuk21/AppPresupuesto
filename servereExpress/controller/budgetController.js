@@ -31,6 +31,7 @@ const getAllEgress = async (req,res)=>{
 
 const createTypeProcess = async (req, res) => {
   const data = {
+    concept:req.body.concept,
     budget_type: req.body.budget_type,
     amount: req.body.amount,
     user_budget: req.body.user_budget,

@@ -2,8 +2,9 @@ const BudgetModel = require("../models/balanceModel");
 const error = require("../common/error");
 const exceptions = require("../common/exceptions");
 
-const createTypeProcess = async ({ budget_type, amount, user_budget }) => {
+const createTypeProcess = async ({ concept,budget_type, amount, user_budget }) => {
   const data = {
+    concept: concept,
     budget_type: budget_type,
     amount: amount,
     user_budget: user_budget,
@@ -22,7 +23,7 @@ const createTypeProcess = async ({ budget_type, amount, user_budget }) => {
   } catch (e) {
     const errorMessage = `Create Process - Detail: ` + e.message;
     console.error(
-      "create Process - processType[" +
+      "create Process - processType["+ concept + " " +
         budget_type +
         "]for amount[" +
         amount +
@@ -43,7 +44,7 @@ const getAllEntry = async ({ user_budget }) => {
     where.budget_type= 1;
   }
   const entry = await BudgetModel.findAll({
-    atributes: ["budget_type","amount","user_budget"],
+    atributes: ["concept","budget_type","amount","user_budget"],
     where: where,
   });
   return entry;
@@ -57,7 +58,7 @@ const getAllEgress = async ({ user_budget}) => {
     where.budget_type= 0;
   }
   const egress = await BudgetModel.findAll({
-    atributes: ["budget_type","amount","user_budget"],
+    atributes: ["concept","budget_type","amount","user_budget"],
     where: where,
   });
   return egress;
