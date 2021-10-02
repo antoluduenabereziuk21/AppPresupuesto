@@ -6,6 +6,7 @@ import { EgressComponent } from './egress/egress.component';
 import { DashboardRoutingModule } from './dashboard-routing.module';
 import { HeadboardComponent } from './headboard/headboard.component';
 import { SharedModule } from '../shared/shared.module';
+import { FormComponent } from './form/form.component';
 
 
 
@@ -14,7 +15,8 @@ import { SharedModule } from '../shared/shared.module';
     DashboardComponent,
     EntryComponent,
     EgressComponent,
-    HeadboardComponent
+    HeadboardComponent,
+    FormComponent
 
   ],
   imports: [
