@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup,FormBuilder,Validators } from '@angular/forms';
 import {Router} from '@angular/router';
+import { AuthService } from 'src/app/services/auth.service';
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
@@ -18,6 +19,7 @@ export class RegisterComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private router: Router,
+    private _authService: AuthService,
 
     ) {
 
@@ -45,14 +47,16 @@ export class RegisterComponent implements OnInit {
 
     console.log(user.user_name + ' ' + user.email + ' ' + user.password +"Se toma el registro");
 
-    // this._authService.register(user).subscribe((res:any) => {
-    //     console.log(res);
-    //     console.log("se lo pasa al servico");
-    //   },
-    //   err => {
-    //     this.errorMessage = err.error.message;
-    //   }
-    //   );
+    this._authService.register(user).subscribe((res:any) => {
+        console.log(res);
+        console.log("se lo pasa al servico");
+      },
+      err => {
+        this.errorMessage = err.error.message;
+        alert(this.errorMessage);
+      }
+      );
+
     this.fakelogin();
     // this.registroOk();
   }
@@ -63,7 +67,7 @@ export class RegisterComponent implements OnInit {
       //redirecccionamos al al escritorio
       // this.loading= false;
       this.router.navigate(['/signin']);
-    },3500
+    },2500
     );
   }
 
