@@ -61,6 +61,7 @@ const login = async ({ email, password }) => {
   const user = await userModel.findOne({
     where: { email: email },
   });
+  console.log("user: "+ user)
   const isMatch = user && (await comparePass(password, user.password));
   if (!isMatch) {
     throw new error.AppError(
@@ -69,6 +70,7 @@ const login = async ({ email, password }) => {
     );
   }
   const token = generateToken(user.id_user, user.user_name);
+  console.log(token);
   return { token };
 };
 

@@ -5,7 +5,7 @@ const exceptions = require("../common/exceptions");
 const createTypeProcess = async ({ concept,budget_type, amount, user_budget }) => {
   const data = {
     concept: concept,
-    budget_type: budget_type,
+    budget_type: JSON.parse(budget_type),
     amount: amount,
     user_budget: user_budget,
     createdAt: new Date(),
@@ -36,29 +36,31 @@ const createTypeProcess = async ({ concept,budget_type, amount, user_budget }) =
   }
 };
 
-const getAllEntry = async ({ user_budget }) => {
+const getAllEntry = async ({ user_budget,budget_type }) => {
   const where = {};
 
   if (user_budget) {
     where.user_budget = user_budget;
-    where.budget_type= 1;
+    where.budget_type= budget_type;
   }
+  console.log(JSON.stringify(where.budget_type));
   const entry = await BudgetModel.findAll({
-    atributes: ["concept","budget_type","amount","user_budget"],
+    atributes: ["budget_type","amount","user_budget"],
     where: where,
   });
   return entry;
 };
 
-const getAllEgress = async ({ user_budget}) => {
+const getAllEgress = async ({user_budget,budget_type}) => {
   const where = {};
 
   if (user_budget) {
     where.user_budget = user_budget;
-    where.budget_type= 0;
+    where.budget_type= budget_type;
   }
+  console.log(where.budget_type);
   const egress = await BudgetModel.findAll({
-    atributes: ["concept","budget_type","amount","user_budget"],
+    atributes: ["budget_type","amount","user_budget"],
     where: where,
   });
   return egress;

@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { UserService } from 'src/app/services/user.service';
+import {Budget} from '../../models/budgetModel';
 
 @Component({
   selector: 'app-egress',
@@ -7,9 +9,22 @@ import { Component, OnInit } from '@angular/core';
 })
 export class EgressComponent implements OnInit {
 
-  constructor() { }
+
+  egresses: Budget [] =[];
+
+  deleted:any ={
+    id_budget: 'number',
+  };
+
+  constructor(
+    private _userService: UserService,
+    ) { }
 
   ngOnInit(): void {
+    this._userService.egressProcess().subscribe((data:any) =>{
+      console.log(JSON.stringify(data));
+      this.egresses = data;
+    });
   }
 
 }

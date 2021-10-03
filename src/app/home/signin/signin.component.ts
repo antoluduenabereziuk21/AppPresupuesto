@@ -48,7 +48,7 @@ export class SigninComponent implements OnInit {
     // }
     this._authService.login(email, password).subscribe(
       data=> {
-        this._tokenStorage.saveToken(data.token);
+        this._tokenStorage.saveToken(data.userInfo.token);
         this.fakelogin();
       },
       err => {

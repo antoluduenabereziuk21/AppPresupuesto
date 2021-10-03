@@ -18,7 +18,7 @@ const createStrategy = () =>{
             if(!user){
                 return next(null,false)
             }
-            console.log(`passportConfig.createStrategy - user.id[${user.id}]`)
+            console.log(`passportConfig.createStrategy - user.id[${user.id_user}]`)
             return next(null,user)
         }catch (e) {
             return next(e)

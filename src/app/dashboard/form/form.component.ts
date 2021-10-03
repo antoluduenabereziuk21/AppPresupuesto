@@ -1,7 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup,FormBuilder,Validators } from '@angular/forms';
-import { AuthService } from 'src/app/services/auth.service';
+import { UserService } from 'src/app/services/user.service';
 import {Router} from '@angular/router';
+import { TokenStorageService } from 'src/app/services/token-storage.service';
+import { Budget } from 'src/app/models/budgetModel'
+interface Concept{
+  value: string;
+  viewValue:string;
+}
 @Component({
   selector: 'app-form',
   templateUrl: './form.component.html',
@@ -9,42 +15,47 @@ import {Router} from '@angular/router';
 })
 export class FormComponent implements OnInit {
 
+  concepts: Concept []= [
+    {value:'0',viewValue:'Ingreso'},
+    {value:'1',viewValue:'Egreso'}
+  ]
+
   register: FormGroup;
-  panelOpenState = false;
-  hide = true;
   loading= false;
   errorMessage = '';
+
   constructor(
     private fb: FormBuilder,
-    private _authService: AuthService,
+    private _userService: UserService,
     private router: Router,
+    private _tokenStorage: TokenStorageService,
   ) {
     this.register = this.fb.group({
-      user_name:['', Validators.required,],
-      email:['', Validators.required],
-      password:['', Validators.required,],
-      confirmPassword:['', Validators.required,],
+      concept:['', Validators.required,],
+      amount:['', Validators.required],
+      budget_type:['', Validators.required,],
     })
    }
 
   ngOnInit(): void {
+    this._tokenStorage.userId();
+
   }
 
-  signUp(){
+  newConcept():void{
+    const concept =this.register.value.concept;
+    console.log(concept);
 
-    console.log(this.register);
-
-    const user = {
-      user_name: this.register.value.user_name,
-      email: this.register.value.email,
-      password: this.register.value.password,
-
+    const budgetUser :Budget = {
+      concept: this.register.value.concept,
+      amount: this.register.value.amount,
+      budget_type: this.register.value.budget_type,
+      user_budget: this._tokenStorage.userId(),
     };
 
-    console.log(user.user_name + ' ' + user.email + ' ' + user.password +"Se toma el registro");
-
-    this._authService.register(user).subscribe((res:any) => {
-        console.log(res);
+    console.log("golllllll" + budgetUser.budget_type + "");
+    this._userService.newConcept(budgetUser).subscribe((data) => {
+        console.log(data);
         console.log("se lo pasa al servico");
       },
       err => {
@@ -52,31 +63,7 @@ export class FormComponent implements OnInit {
         alert(this.errorMessage);
       }
       );
-
-    this.fakelogin();
-    // this.registroOk();
+      this.ngOnInit();
   }
 
-  fakelogin(){
-    this.loading= true;
-    setTimeout(()=>{
-      //redirecccionamos al al escritorio
-      // this.loading= false;
-      this.router.navigate(['/signin']);
-    },2500
-    );
-  }
-
-  back(){
-    this.router.navigate(['/home']);
-  }
-  // registroOk(){
-  //   this._snackbar.open('Resgistro OK','',
-  //     {
-  //       duration:1500,
-  //       horizontalPosition:'center',
-  //       verticalPosition:'top',
-  //       }
-  //   );
-  // }
 }

@@ -13,14 +13,14 @@ app.use(cors())
 passport.use(passportConfig.createStrategy());
 app.use(passport.initialize());
 
-app.use(bodyParser.urlencoded());
-app.use(bodyParser.json());
+app.use(express.urlencoded());
+app.use(express.json());
 app.use("/",router);
 
 app.listen(port, ()=> {
   console.log(`App listen in port :${port}`);
 })
 
-app.use(apiPrefix + "/user",require("./routes/userRoutes"));//localhost:3306/api/v1/users/
+app.use(apiPrefix + "/users",require("./routes/userRoutes"));//localhost:3306/api/v1/users/
 app.use(apiPrefix + "/auth",require ("./routes/authRoutes"));
 

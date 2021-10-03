@@ -1,5 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-// import {Budget} from '../../models/budgetModel';
+import {Budget} from '../../models/budgetModel';
+import { UserService } from 'src/app/services/user.service';
+
+
+
+
 @Component({
   selector: 'app-entry',
   templateUrl: './entry.component.html',
@@ -7,11 +12,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class EntryComponent implements OnInit {
 
-  // entry: Budget =[];
+  entrys: Budget [] =[];
 
-  constructor() { }
+  deleted:any ={
+    id_budget: 'number',
+  };
+
+  constructor(
+    private _userService: UserService,
+  ) { }
 
   ngOnInit(): void {
+    this._userService.entryProcess().subscribe((data:any) =>{
+      console.log(JSON.stringify(data));
+      this.entrys = data;
+    });
   }
 
 }

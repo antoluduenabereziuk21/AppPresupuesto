@@ -18,40 +18,35 @@
               <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
               Loading...
             </button>
-            <form *ngIf="!loading" [formGroup]='register' (ngSubmit)="signUp()">
+            <form *ngIf="!loading" [formGroup]='register' (ngSubmit)="newConcept()">
               <div class="form-floating mb-3">
                 <input
                   type="text"
                   class="form-control "
                   id="floatingInput"
-                  placeholder="User_Name"
-                  formControlName="user_name"
+                  placeholder="concept"
+                  formControlName="concept"
                 />
-                <label for="floatingInput">Enter your Name</label>
+                <label for="floatingInput">Ingresa el Concepto</label>
               </div>
               <div class="form-floating mb-3">
                 <input
-                  type="text"
+                  type="number"
                   class="form-control "
                   id="floatingInput"
-                  placeholder="Entre your Email Address"
-                  formControlName="email"
+                  placeholder="Ingrese el monto"
+                  formControlName="amount"
                 />
-                <label for="floatingInput">Enter your Email Address</label>
+                <label for="floatingInput">Monto Del Concepto</label>
               </div>
               <div class="form-floating mb-3">
-                <input
-                  type="password"
-                  class="form-control "
-                  id="floatingInput"
-                  placeholder="Entre your Password"
-                  formControlName="password"
-                />
-                <label for="floatingInput">Entre your Password</label>
+                <select class="form-select" aria-label="Default select example" formControlName="budget_type">
+                  <option *ngFor="let concept of concepts" [value]="concept.value">{{concept.viewValue}}</option>
+                </select>
               </div>
               <div class="modal-footer align-items:center" >
-                <button type="submit" class="btn btn-primary ancho alto">Save changes</button>
-                <button type="button" class="btn btn-secondary ancho alto" data-bs-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary ancho alto" data-dismiss="modal" >Agregar Concepto</button>
+                <button type="button" class="btn btn-secondary ancho alto" data-bs-dismiss="modal"> Close</button>
               </div>
             </form>
       </div>

@@ -18,7 +18,7 @@ const BudgetModel = sequelizeConnection.define(
     budget_type: {
       type: Sequelize.INTEGER,
       allowNull: false,
-      fields: "budget_tipe",
+      fields: "budget_type",
     },
     amount: {
       type: Sequelize.FLOAT,

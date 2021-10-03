@@ -10,6 +10,7 @@ const getAllEntry = async (req,res)=>{
   }
   const filter = {
     user_budget:req.query.user_budget,
+    budget_type: req.query.budget_type,
   }
 
   const entry = await budgetServices.getAllEntry(filter)
@@ -23,6 +24,7 @@ const getAllEgress = async (req,res)=>{
   }
   const filter = {
     user_budget:req.query.user_budget,
+    budget_type: req.query.budget_type,
   }
 
   const egress = await budgetServices.getAllEgress(filter)

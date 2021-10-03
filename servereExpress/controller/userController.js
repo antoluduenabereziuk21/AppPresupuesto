@@ -33,6 +33,7 @@ const login = async (req, res) => {
   console.log("llega en el body "+JSON.stringify(data.email))
   const userInfo = await userServices.login(data);
   res.json({userInfo})
+  console.log(JSON.stringify(userInfo));
 }
 
 

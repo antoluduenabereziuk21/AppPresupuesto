@@ -5,6 +5,10 @@ import { Router } from '@angular/router';
 
 
 const TOKEN_KEY ='token';
+const USER_KEY = 'auth-user';
+
+console.log(TOKEN_KEY);
+console.log(USER_KEY);
 @Injectable({
   providedIn: 'root'
 })
@@ -17,16 +21,17 @@ export class TokenStorageService {
   ) { }
 
   singOut():void{
-    window.sessionStorage.clear();
+    localStorage.clear();
   }
   public saveToken(token: string): void {
-    console.log("Saving token:"+JSON.stringify(token))
-    window.sessionStorage.removeItem(TOKEN_KEY);
-    window.sessionStorage.setItem(TOKEN_KEY,token);
+
+    // window.sessionStorage.removeItem(TOKEN_KEY);
+    localStorage.setItem(TOKEN_KEY,token);
+    console.log("Saving token:"+ token);
   }
 
   public getToken(): string | null {
-    return window.sessionStorage.getItem(TOKEN_KEY);
+    return localStorage.getItem(TOKEN_KEY);
   }
 
  public isAuth():boolean{
@@ -42,16 +47,16 @@ export class TokenStorageService {
     if( this.isAuth() === true){
       const token:any = this.getToken();
       const {id_user} = this.jwtHelper.decodeToken(token);
-      // console.log(id_user);
+      console.log(id_user);
       return id_user;
     }
   }
   username(){
     if( this.isAuth() === true){
     const token:any = this.getToken();
-    const {user_name} = this.jwtHelper.decodeToken(token);
-    // console.log(user_name);
-    return user_name;
+    const {email} = this.jwtHelper.decodeToken(token);
+    console.log(email);
+    return email;
     }
   }
 
