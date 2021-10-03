@@ -1,13 +1,14 @@
-.dashboard-container{
+.dashboard{
 
-  background-color: orange;
+  // background-color: orange;
   display: flex;
   flex-wrap: wrap;
-  // justify-content: center;
-  // align-items:center;
-  // margin-top:px;
-  padding:0 !important;
-  margin:0 !important;
+  // flex-wrap: inherit;
+  justify-content: center;
+  align-items:center;
+  margin-top:50px;
+  // padding:0 !important;
+  // margin:0 !important;
   // width:100vh;
   max-width:100%;
   min-height: 100%;
@@ -17,8 +18,18 @@
   background-size:cover;
 }
 
-.container{
-  margin-top:100px;
+.container-type{
+  // height:300px;
+  margin:25px;
+  flex-grow:0;
+  flex-shrink:1;
+  // flex-basis:300px;
+  // border-radius:25px;
+  // text-align:centrer;
+  // display:flex;
+  // display:column;
+  // align-items:center;
+  // font-size:2px;
 }
 
 // .container-type{

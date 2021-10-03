@@ -41,11 +41,11 @@ const getAllEntry = async ({ user_budget,budget_type }) => {
 
   if (user_budget) {
     where.user_budget = user_budget;
-    where.budget_type= budget_type;
+    where.budget_type= 0;
   }
   console.log(JSON.stringify(where.budget_type));
   const entry = await BudgetModel.findAll({
-    atributes: ["budget_type","amount","user_budget"],
+    attributes: ["concept","budget_type","amount","user_budget"],
     where: where,
   });
   return entry;
@@ -56,11 +56,11 @@ const getAllEgress = async ({user_budget,budget_type}) => {
 
   if (user_budget) {
     where.user_budget = user_budget;
-    where.budget_type= budget_type;
+    where.budget_type= 1;
   }
   console.log(where.budget_type);
   const egress = await BudgetModel.findAll({
-    atributes: ["budget_type","amount","user_budget"],
+    attributes: ["concept","budget_type","amount","user_budget"],
     where: where,
   });
   return egress;
