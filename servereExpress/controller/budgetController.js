@@ -16,6 +16,8 @@ const getAllEntry = async (req,res)=>{
   const entry = await budgetServices.getAllEntry(filter)
   res.status(200).json(entry)
 }
+
+
 const getAllEgress = async (req,res)=>{
   const query = req.query
   console.log("getAllEgress - query:" +JSON.stringify(query));

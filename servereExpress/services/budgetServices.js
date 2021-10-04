@@ -37,31 +37,30 @@ const createTypeProcess = async ({ concept,budget_type, amount, user_budget }) =
 };
 
 const getAllEntry = async ({ user_budget,budget_type }) => {
-  const where = {};
 
-  if (user_budget) {
+  const where = {}
+  if (user_budget,budget_type) {
     where.user_budget = user_budget;
-    where.budget_type= 0;
+    where.budget_type= budget_type;
   }
   console.log(JSON.stringify(where.budget_type));
   const entry = await BudgetModel.findAll({
     attributes: ["concept","budget_type","amount","user_budget"],
-    where: where,
+    where:where
   });
   return entry;
 };
 
 const getAllEgress = async ({user_budget,budget_type}) => {
-  const where = {};
-
-  if (user_budget) {
+  const where = {}
+  if (user_budget,budget_type) {
     where.user_budget = user_budget;
-    where.budget_type= 1;
+    where.budget_type= budget_type;
   }
   console.log(where.budget_type);
   const egress = await BudgetModel.findAll({
     attributes: ["concept","budget_type","amount","user_budget"],
-    where: where,
+    where:where,
   });
   return egress;
 };
