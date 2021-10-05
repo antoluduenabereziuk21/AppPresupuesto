@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Budget } from '../models/budgetModel';
+import { Budget } from '../../models/budgetModel';
 import { TokenStorageService } from './token-storage.service';
 @Injectable({
   providedIn: 'root'
