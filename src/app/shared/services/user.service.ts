@@ -29,8 +29,8 @@ export class UserService {
     return this.http.post(`${this.URL}users/newprocess`,budget);
   }
 
-  deletedProcess(id: number,data:any) {
-    return this.http.put(`${this.URL}users/deleted${id}`,data);
+  deletedProcess(id_budget: number ){
+    return this.http.delete(`${this.URL}users/${id_budget}`);
   }
 
 }

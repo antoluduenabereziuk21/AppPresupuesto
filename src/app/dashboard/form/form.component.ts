@@ -47,6 +47,7 @@ export class FormComponent implements OnInit {
     console.log(concept);
 
     const budgetUser :Budget = {
+      id_budget:0,
       concept: this.register.value.concept,
       amount: this.register.value.amount,
       budget_type: this.register.value.budget_type,

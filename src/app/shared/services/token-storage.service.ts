@@ -37,7 +37,7 @@ export class TokenStorageService {
  public isAuth():boolean{
     const token:any = this.getToken()
     if (this.jwtHelper.isTokenExpired(token) || !this.getToken()){
-      this.router.navigate(['signin'])
+      this.router.navigate(['home'])
       return false;
     }
     return true;

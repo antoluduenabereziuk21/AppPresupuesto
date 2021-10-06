@@ -45,7 +45,7 @@ const getAllEntry = async ({ user_budget,budget_type }) => {
   }
   console.log(JSON.stringify(where.budget_type));
   const entry = await BudgetModel.findAll({
-    attributes: ["concept","budget_type","amount","user_budget"],
+    attributes: ["id_budget","concept","budget_type","amount","user_budget"],
     where:where
   });
   return entry;
@@ -59,26 +59,26 @@ const getAllEgress = async ({user_budget,budget_type}) => {
   }
   console.log(where.budget_type);
   const egress = await BudgetModel.findAll({
-    attributes: ["concept","budget_type","amount","user_budget"],
+    attributes: ["id_budget","concept","budget_type","amount","user_budget"],
     where:where,
   });
   return egress;
 };
 
-const deleted = async (id) => {
-  // console.log("Deleted -id: " + id);
-  const id_budget = id;
+const deleted = async (id_budget) => {
+  console.log("Deleted -id: " + id_budget);
+  const id_deleted = id_budget;
   const budget = await BudgetModel.destroy({
     where: {
-      id_budget: id_budget,
+      id_budget: id_deleted,
     },
   });
   if (!budget) {
     throw new error.AppError(exceptions.exceptionType.budget.notFound);
   }
 
-  console.log("deleted return :" + id_budget);
-  return "user deleted :" + id_budget;
+  console.log("deleted return :" + budget);
+  return "user deleted :" + budget;
 };
 
 module.exports = {

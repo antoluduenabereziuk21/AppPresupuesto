@@ -14,9 +14,7 @@ export class EntryComponent implements OnInit {
 
   entrys: Budget [] =[];
 
-  deleted:any ={
-    id_budget: 'number',
-  };
+
 
   constructor(
     private _userService: UserService,
@@ -27,6 +25,13 @@ export class EntryComponent implements OnInit {
       console.log(JSON.stringify(data));
       this.entrys = data;
     });
+  }
+
+  deleted(id_budget:number){
+    this._userService.deletedProcess(id_budget).subscribe(data =>{
+      console.log("Estoy eliminando el mensaje de recibidos"+JSON.stringify(data));
+    });
+    this.ngOnInit();
   }
 
 }

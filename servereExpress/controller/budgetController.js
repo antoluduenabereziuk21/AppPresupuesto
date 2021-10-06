@@ -45,11 +45,12 @@ const createTypeProcess = async (req, res) => {
 }
 
 const deletingProcess = async (req,res)=>{
-    const params = req.params
+    const params = req.params.id;
     console.log("Deleted controller - params : "+JSON.stringify(params))
-    const id = params.id
+    const id_budget = params;
+    console.log("imprimo parametro: "+id_budget)
     //call to the budgetServices
-    const budget = await budgetServices.deleted(id)
+    const budget = await budgetServices.deleted(id_budget)
     res.status(200).json({budget})
 }
 
