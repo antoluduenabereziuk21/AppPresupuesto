@@ -1,9 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormGroup,FormBuilder,Validators } from '@angular/forms';
 import { UserService } from 'src/app/shared/services/user.service';
-import {Router} from '@angular/router';
 import { TokenStorageService } from 'src/app/shared/services/token-storage.service';
 import { Budget } from 'src/app/models/budgetModel'
+import { InteractionsService } from 'src/app/shared/services/interactions.service';
 interface Concept{
   value: string;
   viewValue:string;
@@ -15,6 +15,7 @@ interface Concept{
 })
 export class FormComponent implements OnInit {
 
+
   concepts: Concept []= [
     {value:'0',viewValue:'Ingreso'},
     {value:'1',viewValue:'Egreso'}
@@ -23,12 +24,13 @@ export class FormComponent implements OnInit {
   register: FormGroup;
   loading= false;
   errorMessage = '';
+  update: boolean = true;
 
   constructor(
     private fb: FormBuilder,
     private _userService: UserService,
-    private router: Router,
     private _tokenStorage: TokenStorageService,
+    private _interactionService: InteractionsService,
   ) {
     this.register = this.fb.group({
       concept:['', Validators.required,],
@@ -39,12 +41,10 @@ export class FormComponent implements OnInit {
 
   ngOnInit(): void {
     this._tokenStorage.userId();
-
+    // this.dateEmiter();
   }
 
   newConcept():void{
-    const concept =this.register.value.concept;
-    console.log(concept);
 
     const budgetUser :Budget = {
       id_budget:0,
@@ -53,10 +53,13 @@ export class FormComponent implements OnInit {
       budget_type: this.register.value.budget_type,
       user_budget: this._tokenStorage.userId(),
     };
-
+    this._interactionService.updateBudgetObservable.subscribe(update=>{
+      this.update= update;
+      console.log("Evento");
+    });
     console.log("golllllll" + budgetUser.budget_type + "");
     this._userService.newConcept(budgetUser).subscribe((data) => {
-        console.log(data);
+        // console.log(data);
         console.log("se lo pasa al servico");
       },
       err => {
@@ -64,7 +67,14 @@ export class FormComponent implements OnInit {
         alert(this.errorMessage);
       }
       );
-      this.ngOnInit();
+
+
   }
 
+  // dateEmiter(){
+  //   this._interactionService.updateBudgetObservable.subscribe(update=>{
+  //     this.update= update;
+  //     console.log("Evento");
+  //   });
+  // }
 }

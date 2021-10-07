@@ -6,11 +6,11 @@
         <div class="elemento_descripcion">{{ entry.concept }}</div>
         <div class="derecha limpiarEstilos">
           <div class="elemento_eliminar">
-            <button class="elemento_eliminar--btn" (click)="deleted(entry.id_budget) ">
+            <button type="submit" class="elemento_eliminar--btn" (click)="deleted(entry.id_budget);">
               <i class="fas fa-trash"></i>
             </button>
           </div>
-          <div class="elemento_valor">+ {{ entry.amount }}</div>
+          <div class="elemento_valor">+ {{ entry.amount |currency:'AR':'$':'1.2-2'}}</div>
         </div>
       </div>
     </div>

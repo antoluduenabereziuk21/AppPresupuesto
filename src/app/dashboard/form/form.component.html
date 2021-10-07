@@ -18,7 +18,7 @@
               <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
               Loading...
             </button>
-            <form *ngIf="!loading" [formGroup]='register' (ngSubmit)="newConcept()">
+            <form *ngIf="!loading" [formGroup]='register' (ngSubmit)="newConcept();">
               <div class="form-floating mb-3">
                 <input
                   type="text"
@@ -45,7 +45,7 @@
                 </select>
               </div>
               <div class="modal-footer align-items:center" >
-                <button type="submit" class="btn btn-primary ancho alto" data-dismiss="modal" >Agregar Concepto</button>
+                <button type="submit" class="btn btn-primary ancho alto" data-bs-dismiss="modal">Agregar Concepto</button>
                 <button type="button" class="btn btn-secondary ancho alto" data-bs-dismiss="modal"> Close</button>
               </div>
             </form>

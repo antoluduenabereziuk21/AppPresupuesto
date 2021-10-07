@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,Input,EventEmitter, Output } from '@angular/core';
 import { UserService } from 'src/app/shared/services/user.service';
 import {Budget} from 'src/app/models/budgetModel';
-
+import { InteractionsService } from 'src/app/shared/services/interactions.service';
 @Component({
   selector: 'app-headboard',
   templateUrl: './headboard.component.html',
@@ -11,45 +11,60 @@ export class HeadboardComponent implements OnInit {
 
   entrys:Budget[] = [];
   egresses:Budget[] = [];
+  update!: boolean ;
 
-  constructor( private _userService: UserService) { }
+  constructor( private _userService: UserService,
+               private _interactionService: InteractionsService
+              ) { }
 
   ngOnInit(): void {
+
     this.entryBudget();
     this.egressBudget();
+    this.sumatoryEntries();
+    this.sumatoryEgress();
+    this.percentageEgress();
+    this.totalBudget();
+
   }
   entryBudget(){
     this._userService.entryProcess().subscribe((data:any) =>{
-    console.log(JSON.stringify(data));
+    // console.log(JSON.stringify(data));
     this.entrys= data;
   });
-}
+  }
   egressBudget(){
     this._userService.egressProcess().subscribe((data:any) =>{
-      console.log(JSON.stringify(data));
+      // console.log(JSON.stringify(data));
       this.egresses = data;
     });
   }
 
   sumatoryEntries(){
     let totalEntries:number =0;
-    for (let entry of this.entrys){
-      totalEntries+= JSON.parse(entry.amount);
-    }
-    console.log("estoy imprimiendo las entras:"+totalEntries);
+    this.entrys.forEach(entry=>{
+      totalEntries += JSON.parse(entry.amount);
+    });
+    // for (let entry of this.entrys){
+    //   totalEntries+= JSON.parse(entry.amount);
+    // }
+    // console.log("estoy imprimiendo las entras:"+totalEntries);
     return totalEntries;
   }
   sumatoryEgress(){
     let totalEgress:number =0;
-    for (let egress of this.egresses){
+    this.egresses.forEach(egress=>{
       totalEgress+= JSON.parse(egress.amount);
-    }
-    console.log("estoy imprimiendo las salidas:"+totalEgress);
+    });
+    // for (let egress of this.egresses){
+    //   totalEgress+= JSON.parse(egress.amount);
+    // }
+    // console.log("estoy imprimiendo las salidas:"+totalEgress);
     return totalEgress;
   }
   percentageEgress(){
     const percentage= this.sumatoryEgress()/this.sumatoryEntries();
-    console.log("estoy imprimiendo el porcentaje:"+percentage);
+    // console.log("estoy imprimiendo el porcentaje:"+percentage);
     return percentage;
   }
   totalBudget(){
@@ -57,5 +72,15 @@ export class HeadboardComponent implements OnInit {
     return total;
   }
 
+  // dateEmiter(){
+  //   this._interactionService.updateBudgetObservable.subscribe(update=>{
+  //     this.update= update;
+  //      if(update == true ){
+  //        this.entryBudget();
+  //        this.entryBudget();
+  //     }
+  // console.log("esoty recibiendo el evento" + update)
+  //   });
+  // }
 
 }
