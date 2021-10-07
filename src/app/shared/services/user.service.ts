@@ -2,14 +2,16 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Budget } from '../../models/budgetModel';
 import { TokenStorageService } from './token-storage.service';
+
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
 
+
   private URL = 'http://localhost:3000/api/v1/';
   private ID = this._tokenStorage.userId();
-  ;
+
 
   constructor(
     private http: HttpClient,
