@@ -4,20 +4,17 @@ const exceptions = require('../common/exceptions');
 
 const getAllEntry = async (req,res)=>{
   const query = req.query
-  console.log("getAllEntrys - query:" +JSON.stringify(query));
+  console.log("getAllEntry - query:" +JSON.stringify(query));
   if(!req.query){
     throw new error.AppError(exceptions.exceptionType.budget.badRequest,"place entry user_budget");
   }
   const filter = {
     user_budget:req.query.user_budget,
-    budget_type: 0,
+    budget_type: 1,
   }
-
   const entry = await budgetServices.getAllEntry(filter)
   res.status(200).json(entry)
 }
-
-
 const getAllEgress = async (req,res)=>{
   const query = req.query
   console.log("getAllEgress - query:" +JSON.stringify(query));
@@ -26,7 +23,7 @@ const getAllEgress = async (req,res)=>{
   }
   const filter = {
     user_budget:req.query.user_budget,
-    budget_type: 1,
+    budget_type:2,
   }
 
   const egress = await budgetServices.getAllEgress(filter)

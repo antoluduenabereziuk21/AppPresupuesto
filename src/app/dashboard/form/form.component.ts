@@ -17,8 +17,8 @@ export class FormComponent implements OnInit {
 
 
   concepts: Concept []= [
-    {value:'0',viewValue:'Ingreso'},
-    {value:'1',viewValue:'Egreso'}
+    {value:'1',viewValue:'Ingreso'},
+    {value:'2',viewValue:'Egreso'}
   ]
 
   register: FormGroup;
@@ -41,7 +41,6 @@ export class FormComponent implements OnInit {
 
   ngOnInit(): void {
     this._tokenStorage.userId();
-    // this.dateEmiter();
   }
 
   newConcept():void{
@@ -53,28 +52,22 @@ export class FormComponent implements OnInit {
       budget_type: this.register.value.budget_type,
       user_budget: this._tokenStorage.userId(),
     };
-    this._interactionService.updateBudgetObservable.subscribe(update=>{
-      this.update= update;
-      console.log("Evento");
-    });
+
     console.log("golllllll" + budgetUser.budget_type + "");
     this._userService.newConcept(budgetUser).subscribe((data) => {
-        // console.log(data);
+        console.log(data);
         console.log("se lo pasa al servico");
+        this.dateEmiter()
       },
       err => {
         this.errorMessage = err.error.message;
         alert(this.errorMessage);
       }
       );
-
-
   }
 
-  // dateEmiter(){
-  //   this._interactionService.updateBudgetObservable.subscribe(update=>{
-  //     this.update= update;
-  //     console.log("Evento");
-  //   });
-  // }
+  dateEmiter(){
+    this._interactionService.updateBudget();
+  }
+
 }

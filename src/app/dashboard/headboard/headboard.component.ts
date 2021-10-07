@@ -19,6 +19,8 @@ export class HeadboardComponent implements OnInit {
 
   ngOnInit(): void {
 
+    // this._interactionService.updateBudgetObservable$.subscribe(()=> alert ('component2 method called'));
+    this.dateEmiter();
     this.entryBudget();
     this.egressBudget();
     this.sumatoryEntries();
@@ -72,15 +74,13 @@ export class HeadboardComponent implements OnInit {
     return total;
   }
 
-  // dateEmiter(){
-  //   this._interactionService.updateBudgetObservable.subscribe(update=>{
-  //     this.update= update;
-  //      if(update == true ){
-  //        this.entryBudget();
-  //        this.entryBudget();
-  //     }
-  // console.log("esoty recibiendo el evento" + update)
-  //   });
-  // }
-
+  dateEmiter(){
+    this._interactionService.updateBudgetObservable$.subscribe(()=> {
+      // alert ('component1 method called');
+      this.entryBudget();
+      this.egressBudget();
+    });
+  };
 }
+
+

@@ -6,14 +6,12 @@ import { Subject } from 'rxjs';
 })
 export class InteractionsService {
 
-  update!:boolean;
 
   private updatedBudgetSubject = new Subject<boolean>();
-  updateBudgetObservable = this.updatedBudgetSubject.asObservable();
+  updateBudgetObservable$ = this.updatedBudgetSubject.asObservable();
 
-  updateBudget(update:boolean) {
-    this.update = update;
-    this.updatedBudgetSubject.next(update);
+  updateBudget() {
+    this.updatedBudgetSubject.next();
   }
 
 }

@@ -21,7 +21,7 @@ export class EgressComponent implements OnInit {
 
   ngOnInit(): void {
     this.egress();
-    // this.dateEmiter();
+    this.dateEmiter();
   }
 
   egress(){
@@ -34,15 +34,20 @@ export class EgressComponent implements OnInit {
   deleted(id_budget:number){
     this._userService.deletedProcess(id_budget).subscribe(data =>{
       // console.log("Estoy eliminando el mensaje de recibidos"+JSON.stringify(data));
+      this.dateEmiterDelet();
       this.egress();
     });
   }
 
-  // dateEmiter(){
-  //   this._interactionService.updateBudgetObservable.subscribe(update=>{
-  //     this.update= update;
-  //   });
-  //   this.egress();
-  // }
+  dateEmiter(){
+    this._interactionService.updateBudgetObservable$.subscribe(()=> {
+      // alert ('component3 method called');
+      this.egress();
+    });
+  }
+
+  dateEmiterDelet(){
+    this._interactionService.updateBudget();
+  }
 
 }
