@@ -24,7 +24,7 @@ export class FormComponent implements OnInit {
   register: FormGroup;
   errorMessage = '';
   update: boolean = true;
-
+  loading: boolean = false;
   constructor(
     private fb: FormBuilder,
     private _userService: UserService,

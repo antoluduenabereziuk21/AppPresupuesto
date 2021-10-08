@@ -33,7 +33,7 @@
         ></button>
       </div>
       <div class="modal-body" style="background-color: orange">
-        <button class="btn btn-primary" type="button" disabled>
+        <button *ngIf="loading" class="btn btn-primary" type="button" disabled>
           <span
             class="spinner-border spinner-border-sm"
             role="status"
@@ -41,7 +41,7 @@
           ></span>
           Loading...
         </button>
-        <form [formGroup]="register" (ngSubmit)="newConcept()">
+        <form *ngIf="!loading" [formGroup]="register" (ngSubmit)="newConcept()">
           <div class="form-floating mb-3">
             <input
               type="text"

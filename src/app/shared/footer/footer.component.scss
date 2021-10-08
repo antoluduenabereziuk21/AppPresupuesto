@@ -1,6 +1,6 @@
-.container{
+.container-fluid{
   background-color: orange;
   color:black;
-  // width:100;
+  max-width:auto !important;
   margin:0;
 }
