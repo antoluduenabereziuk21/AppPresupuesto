@@ -1,54 +1,95 @@
 <!-- Button trigger modal -->
 <div class="d-grid gap-2 col-6 mx-auto">
-  <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+  <button
+    type="button"
+    class="btn btn-primary"
+    data-bs-toggle="modal"
+    data-bs-target="#exampleModal"
+  >
     Agregar Ingreso O Egreso
   </button>
 </div>
 
 <!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered" style="background-color:orange">
-    <div class="modal-content ">
+<div
+  class="modal fade"
+  id="exampleModal"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div
+    class="modal-dialog modal-dialog-centered"
+    style="background-color: orange"
+  >
+    <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLabel">Complete los Campos</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
       </div>
-      <div class="modal-body" style="background-color:orange ">
-            <button *ngIf="loading" class="btn btn-primary" type="button" disabled >
-              <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-              Loading...
+      <div class="modal-body" style="background-color: orange">
+        <button class="btn btn-primary" type="button" disabled>
+          <span
+            class="spinner-border spinner-border-sm"
+            role="status"
+            aria-hidden="true"
+          ></span>
+          Loading...
+        </button>
+        <form [formGroup]="register" (ngSubmit)="newConcept()">
+          <div class="form-floating mb-3">
+            <input
+              type="text"
+              class="form-control"
+              id="floatingInput"
+              placeholder="concept"
+              formControlName="concept"
+            />
+            <label for="floatingInput">Ingresa el Concepto</label>
+          </div>
+          <div class="form-floating mb-3">
+            <input
+              type="number"
+              class="form-control"
+              id="floatingInput"
+              placeholder="Ingrese el monto"
+              formControlName="amount"
+            />
+            <label for="floatingInput">Monto Del Concepto</label>
+          </div>
+          <div class="form-floating mb-3">
+            <select
+              class="form-select"
+              aria-label="Default select example"
+              formControlName="budget_type"
+            >
+              <option *ngFor="let concept of concepts" [value]="concept.value">
+                {{ concept.viewValue }}
+              </option>
+            </select>
+          </div>
+          <div class="modal-footer align-items:center">
+            <button
+              type="submit"
+              class="btn btn-primary ancho alto"
+              data-bs-dismiss="modal"
+            >
+              Agregar Concepto
             </button>
-            <form *ngIf="!loading" [formGroup]='register' (ngSubmit)="newConcept();">
-              <div class="form-floating mb-3">
-                <input
-                  type="text"
-                  class="form-control "
-                  id="floatingInput"
-                  placeholder="concept"
-                  formControlName="concept"
-                />
-                <label for="floatingInput">Ingresa el Concepto</label>
-              </div>
-              <div class="form-floating mb-3">
-                <input
-                  type="number"
-                  class="form-control "
-                  id="floatingInput"
-                  placeholder="Ingrese el monto"
-                  formControlName="amount"
-                />
-                <label for="floatingInput">Monto Del Concepto</label>
-              </div>
-              <div class="form-floating mb-3">
-                <select class="form-select" aria-label="Default select example" formControlName="budget_type">
-                  <option *ngFor="let concept of concepts" [value]="concept.value">{{concept.viewValue}}</option>
-                </select>
-              </div>
-              <div class="modal-footer align-items:center" >
-                <button type="submit" class="btn btn-primary ancho alto" data-bs-dismiss="modal">Agregar Concepto</button>
-                <button type="button" class="btn btn-secondary ancho alto" data-bs-dismiss="modal"> Close</button>
-              </div>
-            </form>
+            <button
+              type="button"
+              class="btn btn-secondary ancho alto"
+              data-bs-dismiss="modal"
+            >
+              Close
+            </button>
+          </div>
+        </form>
       </div>
     </div>
   </div>

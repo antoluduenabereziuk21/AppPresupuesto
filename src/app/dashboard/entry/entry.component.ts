@@ -25,6 +25,7 @@ export class EntryComponent implements OnInit {
     this.entry();
     this.dateEmiter();
   }
+  //this method call to service for get to process of entry
 
   entry():void{
     this._userService.entryProcess().subscribe((data:any) =>{
@@ -32,6 +33,7 @@ export class EntryComponent implements OnInit {
       this.entrys = data;
     });
   }
+  //this method call to service for delete process of budget and emit to heardboard changes
 
   deleted(id_budget:number){
     this._userService.deletedProcess(id_budget).subscribe(data =>{
@@ -40,6 +42,7 @@ export class EntryComponent implements OnInit {
       this.entry();
     });
   }
+  //this dateEmiter received the event send to el service and recall the service
 
   dateEmiter(){
     this._interactionService.updateBudgetObservable$.subscribe(()=> {
@@ -47,6 +50,7 @@ export class EntryComponent implements OnInit {
       this.entry();
     });
   }
+  //this method emit el event delete
 
   dateEmiterDelet(){
     this._interactionService.updateBudget();
